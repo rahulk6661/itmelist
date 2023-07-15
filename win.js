@@ -56,3 +56,81 @@ newdiv1.appendChild(newdivtext1);
 var con=document.querySelector('header .container');
 var h1=document.querySelector('header h1');
 con1.insertbefore(newdiv,h1);
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var filter = document.getElementById('filter');
+
+var form = document.getElementById('addForm');
+var itemList = document.getElementById('items');
+var editbutton=document.getElementById('items');
+var filter = document.getElementById('filter');
+
+// Form submit event
+form.addEventListener('submit', addItem);
+// Delete event
+itemList.addEventListener('click', removeItem);
+//edit event
+editbutton.addEventListener('click',edititem);
+// Filter event
+filter.addEventListener('keyup', filterItems);
+
+// Add item
+function addItem(e){
+  e.preventDefault();
+
+  // Get input value
+  var newItem = document.getElementById('item').value;
+
+  // Create new li element
+  var li = document.createElement('li');
+  // Add class
+  li.className = 'list-group-item';
+  // Add text node with input value
+  li.appendChild(document.createTextNode(newItem));
+
+  // Create del button element
+  var deleteBtn = document.createElement('button');
+//create edit button element
+  var editbtn=document.createElement('button');
+  // Add classes to del button
+  deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+//add class to edit button
+  editbtn.className='btn btn-danger btn-sm float-right edit';
+  // Append text node
+  deleteBtn.appendChild(document.createTextNode("delete"));
+// append text node
+  editbtn.appendChild(document.createTextNode("edit"));
+  // Append button to li
+  li.appendChild(deleteBtn);
+   //append button to li
+  li.appendChild(editbtn);
+  // Append li to list
+  itemList.appendChild(li);
+  editbutton.appendChild(li);
+}
+//edit item
+function edititem(e)
+{
+  if(e.target.classList.contains('edit'))
+    {
+      if(confirm('you want edit?'))
+                 {
+                 var li = e.target.parentElement.textContent;
+                 li.contentEditable=true;
+          
+                 }
+    }
+}
+
+// Remove item
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      itemList.removeChild(li);
+    }
+  }
+}
+
+
+}
